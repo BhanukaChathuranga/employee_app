@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { CardActions,Card,CardContent,CardMedia,Typography } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,16 +6,17 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 import { Button, LinkButton } from '@components';
 import { GENDER } from '@utils';
+import { funcContext } from 'pages/employee/list';
 
-export default function MediaCard({ element, title, updateEmp, openDialog }) {
+export default function MediaCard({ element, title }) {
+    
+    const { updateEmp, openDialog } = useContext(funcContext);
     const { first_name, last_name, email, number, gender, photo, id } = element;
-
 
     const deletEmp = useCallback(() => {
         updateEmp(element);
         return openDialog();
     }, [updateEmp, openDialog, element]);
-
 
     return (
         <Card sx={{ maxWidth: 345 }}>

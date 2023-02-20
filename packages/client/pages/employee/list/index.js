@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { createContext, useCallback } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid } from "@mui/material";
@@ -9,6 +9,8 @@ import { wrapper } from "src/store/store";
 import { Button, ConfirmModal, Gridview, LinkButton, TableView } from "@components";
 import { getDetails, getEmployees, selectEmployee, useDeleteEmployeeMutation } from "src/feature/employees";
 import { useToggle } from "src/hooks/toggle";
+
+export const funcContext = createContext();
 
 export default function Employees({ initialEmployees }) {
 
@@ -47,10 +49,14 @@ export default function Employees({ initialEmployees }) {
                     </Grid>
                 </Grid>
                 <Container fixed >
-                    <Grid container spacing={4}>
-                        {!isTableView && <Gridview data={initialEmployees} updateEmp={updateEmp} openDialog={openDialog} />}
-                        {isTableView && <TableView data={initialEmployees} updateEmp={updateEmp} openDialog={openDialog} />}
-                    </Grid>
+
+                    <funcContext.Provider value={{ updateEmp, openDialog }}>
+                        <Grid container spacing={4}>
+                            {!isTableView && <Gridview data={initialEmployees} />}
+                            {isTableView && <TableView data={initialEmployees} />}
+                        </Grid>
+                    </funcContext.Provider>
+
                 </Container>
             </Grid>
             <ConfirmModal open={isDialogOpen} closeDialog={closeDialog} confirm={deleteEmp} />

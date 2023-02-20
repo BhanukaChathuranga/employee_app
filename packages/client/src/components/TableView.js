@@ -1,19 +1,37 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { useRouter } from "next/router";
 import { CardMedia, Grid } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { GENDER } from "@utils";
 import styles from 'styles/Table.module.css';
+import { funcContext } from "pages/employee/list";
 
-const Actions = ({ obj, onUpdate, onDelete }) => {
+const Actions = ({ obj }) => {
+    const { updateEmp, openDialog } = useContext(funcContext);
+
+    const router = useRouter();
+
+    const onUpdate = useCallback(async data => {
+        await updateEmp(data);
+        router.push(`/employee/edit/${data?.id}`);
+        return;
+    }, [updateEmp, router]);
+
+    const onDelete = useCallback(async data => {
+        await updateEmp(data);
+        return openDialog();
+    }, [updateEmp, openDialog])
+
     return (
-        <>
-            <button className={styles.button} onClick={() => onUpdate(obj)}>Edit</button>
-            <button onClick={() => onDelete(obj)} style={{ padding: 0 }}>
+        <Grid container>
+            <Grid item>
+                <button className={styles.button} onClick={() => onUpdate(obj)}>Edit</button>
+            </Grid>
+            <Grid item onClick={() => onDelete(obj)} className={styles.btn_delete}>
                 <DeleteIcon style={{ color: 'red' }} />
-            </button>
-        </>
+            </Grid>
+        </Grid>
     )
 }
 
@@ -33,50 +51,49 @@ const TableHead = () => {
     )
 }
 
+export const TableBody = ({ data }) => {
+    return (
+        <tbody>
+            {data.map(emp => <tr key={emp.id}>
+                <td className={styles.p_5}>
+                    <CardMedia
+                        key={emp.photo}
+                        sx={{ height: 50, width: 50 }}
+                        image={emp.photo}
+                        title={'user_image'}
+                    />
+                </td>
+                <td className={styles.p_25}>{emp.first_name}</td>
+                <td className={styles.p_25}>{emp.last_name}</td>
+                <td className={styles.p_25}>{emp.email}</td>
+                <td className={styles.p_25}>{emp.number}</td>
+                <td className={styles.p_25}>{GENDER[emp.gender]}</td>
+                <td className={styles.p_5}>
+                    <Actions obj={emp} />
+                </td>
+            </tr>
+            )}
+        </tbody>
+    )
+}
 
 
-function TableView({ data, updateEmp, openDialog }) {
+export const Table = ({ data }) => {
+    if (data.length <= 0) return (<>No Found data...!</>);
 
-    const router = useRouter();
+    return (
+        <table className={styles.table}>
+            <TableHead />
+            <TableBody data={data} />
+        </table>
+    );
+}
 
-    const onUpdate = useCallback(async data => {
-        await updateEmp(data);
-        router.push(`/employee/edit/${data?.id}`);
-        return;
-    }, [updateEmp, router]);
-
-    const onDelete = useCallback(async data => {
-        await updateEmp(data);
-        return openDialog();
-    }, [updateEmp, openDialog])
-
+function TableView({ data }) {
 
     return (
         <Grid item display={'flex'} justifyContent={'center'} xs={12}>
-            <table className={styles.table}>
-                <TableHead />
-                <tbody>
-                    {data.map(emp => <tr key={emp.id}>
-                        <td className={styles.p_5}>
-                            <CardMedia
-                                key={emp.photo}
-                                sx={{ height: 50, width: 50 }}
-                                image={emp.photo}
-                                title={'user_image'}
-                            />
-                        </td>
-                        <td>{emp.first_name}</td>
-                        <td>{emp.last_name}</td>
-                        <td>{emp.email}</td>
-                        <td>{emp.number}</td>
-                        <td>{GENDER[emp.gender]}</td>
-                        <td className={styles.p_5}>
-                            <Actions obj={emp} onUpdate={onUpdate} onDelete={onDelete} />
-                        </td>
-                    </tr>
-                    )}
-                </tbody>
-            </table>
+            <Table data={data} />
         </Grid>
     )
 }
