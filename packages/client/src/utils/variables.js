@@ -11,8 +11,8 @@ export const phoneRegExp = /^[+][0-9]{3}[0-9]{3}[0-9]{4,5}$/
 export const empListUrl = "/employee/list";
 
 export const schema = yup.object({
-    first_name: yup.string().trim().nonNullable().max(10, 'First Name must be at most 10 characters').min(6, 'First Name must be at least 6 characters').required(),
-    last_name: yup.string().nonNullable().max(10).min(6).required(),
+    first_name: yup.string().strict().trim().nonNullable().max(10, 'First Name must be at most 10 characters').min(6, 'First Name must be at least 6 characters').required(),
+    last_name: yup.string().strict().trim().nonNullable().max(10).min(6).required(),
     email: yup.string().email().required(),
     number: yup.string().min(10).max(13).matches(phoneRegExp),
     gender: yup.string().required()
