@@ -4,7 +4,7 @@ module.exports = getEmployee = async(req, res) => {
    const employee = await EmployeeModel.find({});
 
     try {
-        console.log(employee);
+        // console.log(employee);
         res.status(200).json(employee);
     } catch (error) {
         console.log('Employees get error : ',error);
