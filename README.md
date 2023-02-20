@@ -1,6 +1,6 @@
 # employee_app
 
-Make sure to update db data
+Make sure to update db data = /packages/server/.env
 
 ## install
 
