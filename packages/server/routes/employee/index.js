@@ -1,18 +1,11 @@
 var express = require('express');
-const mongoose = require('mongoose');
 var router = express.Router();
 
-const { userSchema } = require('../../modal/user');
+const { getEmployee, addEmployee, updateEmployee, deleteEmployee } = require('../../controllers/employee');
 
-router.get('/', (req, res) => {
-    const Users = mongoose.model("Employees", userSchema);
-    Users.find().then(user => {
-        console.log(user)
-        res.json(user)
-    })
-});
-router.post('/');
-router.put('/:empId');
-router.delete('/:empId');
+router.get('/', getEmployee);
+router.post('/', addEmployee);
+router.put('/:empId', updateEmployee);
+router.delete('/:empId', deleteEmployee);
 
 module.exports = router;
