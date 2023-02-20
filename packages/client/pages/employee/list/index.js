@@ -36,16 +36,14 @@ export default function Employees({ initialEmployees }) {
         <>
             <Grid overflow={'hidden'}>
                 <Grid container display={'flex'} direction={'row-reverse'} margin={'20px'}>
-                    <Grid item xs={1}>
-                        <Button data-testid='btnToggle' onClick={() => viewToggle()}>
-                            {!isTableView && <FormatListBulletedIcon />}
-                            {isTableView && <AppsIcon />}
-                        </Button>
-                    </Grid>
                     <Grid item xs={2}>
                         <LinkButton href={"/employee/add"}>
                             add Employee
                         </LinkButton>
+                        <Button data-testid='btnToggle' onClick={() => viewToggle()}>
+                            {!isTableView && <FormatListBulletedIcon />}
+                            {isTableView && <AppsIcon />}
+                        </Button>
                     </Grid>
                 </Grid>
                 <Container fixed >
