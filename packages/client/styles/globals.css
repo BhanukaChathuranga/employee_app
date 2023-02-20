@@ -36,3 +36,8 @@ button {
   padding: 0.5rem 1rem;
   font-weight: bold;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
