@@ -5,5 +5,13 @@
   "description": "This is a employee app",
   "workspaces": [
     "./packages/**"
-  ]
+  ],
+  "scripts": {
+    "dev-client": "yarn workspace @employee-app/client run dev",
+    "dev-server": "yarn workspace @employee-app/server run dev",
+    "dev": "concurrently --kill-others-on-fail \"yarn dev-server\"  \"yarn dev-client\""
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }
