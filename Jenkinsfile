@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'node-test'
-    }
-
-  }
+  agent any
   stages {
     stage('Build') {
       steps {
@@ -12,8 +7,11 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    dev = ''
+    stage('Test') {
+      steps {
+        echo 'This is test'
+      }
+    }
+
   }
 }
