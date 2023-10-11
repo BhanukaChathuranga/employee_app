@@ -3,7 +3,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''echo \'install\'
+        sh '''sudo apt install nodejs
+sudo apt install npm
+echo \'install\'
 npm install -g yarn
 yarn install
 echo \'build\'
