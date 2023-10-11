@@ -3,7 +3,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''echo \'build\'
+        sh '''echo \'install\'
+npm install -g yarn
+yarn install
+echo \'build\'
 yarn workspace @employee-app/client run build'''
       }
     }
