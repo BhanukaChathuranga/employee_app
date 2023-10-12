@@ -1,9 +1,6 @@
 pipeline {
   agent {
-    docker {
-      image 'node:18.18.0-alpine3.18'
-      args '--privileged -p 3000:3000'
-    }
+    docker { image 'node:18.18.0-alpine3.18' }
   }  
   stages {
     stage('Build') {
@@ -11,12 +8,5 @@ pipeline {
         sh 'node -v'
       }
     }
-
-    stage('Test') {
-      steps {
-        echo 'This is test'
-      }
-    }
-
   }
 }
