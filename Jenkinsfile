@@ -6,5 +6,10 @@ pipeline {
         sh 'node --version'
       }
     }
+    stage('Deploy') {
+      steps {
+        sh 'npm --version'
+      }
+    }
   }
 }
