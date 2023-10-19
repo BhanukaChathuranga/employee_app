@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh 'node --version'
         sh 'npm --version'
-        sh 'sudo npm install --global yarn'
+        sh 'npm install yarn'
         sh 'yarn --version'
       }
     }
