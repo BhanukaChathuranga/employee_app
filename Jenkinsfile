@@ -10,7 +10,6 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'yarn install'
         sh 'yarn workspace @employee-app/client build'
       }
     }
