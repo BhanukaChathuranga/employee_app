@@ -5,7 +5,6 @@ pipeline {
       steps {
         sh 'node --version'
         sh 'npm --version'
-        sh 'npm install -g yarn'
         sh 'yarn --version'
       }
     }
