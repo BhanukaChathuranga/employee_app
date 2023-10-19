@@ -1,9 +1,18 @@
 pipeline {
   agent { dockerfile true }
   stages {
-    stage('Test') {
+    stage('Check') {
       steps {
         sh 'node --version'
+        sh 'npm --version'
+        sh 'npm install --global yarn'
+        sh 'yarn --version'
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'yarn install'
+        sh 'yarn workspace @employee-app/client build'
       }
     }
     stage('Deploy') {
