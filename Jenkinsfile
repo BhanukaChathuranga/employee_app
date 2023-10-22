@@ -14,6 +14,11 @@ pipeline {
         sh 'yarn workspace @employee-app/client build'
       }
     }
+     stage('Test') {
+      steps {
+        sh 'yarn workspace @employee-app/client test'
+      }
+    }
     stage('Deploy') {
       steps {
         sh 'npm --version'
