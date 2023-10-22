@@ -11,8 +11,8 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 var corsOptions = {
-  origin: 'http://localhost:3000',
-  // origin: '*',
+  // origin: 'http://localhost:3000',
+  origin: '*',
 }
 
 const DB_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.79wup.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`;
