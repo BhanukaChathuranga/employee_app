@@ -16,6 +16,7 @@ pipeline {
     }
      stage('Test') {
       steps {
+        sh 'yarn workspace @employee-app/server dev'
         sh 'yarn workspace @employee-app/client test'
       }
     }
