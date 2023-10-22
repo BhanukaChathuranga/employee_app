@@ -1,11 +1,12 @@
 import { Button } from "@components";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { renderWithProviders } from '../../src/utils/test-utils';
 // import userEvent from "@testing-library/user-event";
 
 describe('Button', () => {
     test('should render correctly', async () => {
-        render(<Button title="employee">test</Button>);
-        expect(screen.getByRole('button')).toHaveTextContent('test');
-        expect(1).toBe(1);
+        renderWithProviders(<Button title="employee">employee</Button>);
+        const btn = await screen.getByTestId('btn');
+        expect(btn.textContent).toBe('employee');
     })
 })

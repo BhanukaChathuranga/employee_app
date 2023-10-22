@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 function NavBar({ title }) {
     return (
-        <AppBar position='relative' color='primary'>
+        <AppBar data-testid="navbar" position='relative' color='primary'>
             <Toolbar>
                 <Typography variant="h6" component="div">
                     {title}

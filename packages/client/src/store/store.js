@@ -4,7 +4,7 @@ import { createWrapper } from 'next-redux-wrapper';
 
 import { employeeApi, employeeSlice } from '../feature/employees';
 
-const store = () =>
+export const store = () =>
   configureStore({
     reducer: {
       [employeeApi.reducerPath]: employeeApi.reducer,
