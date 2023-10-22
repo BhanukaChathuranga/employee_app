@@ -6,6 +6,7 @@ pipeline {
         sh 'node --version'
         sh 'npm --version'
         sh 'yarn --version'
+        sh 'yarn install'
       }
     }
     stage('Build') {
